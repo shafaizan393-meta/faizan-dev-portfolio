@@ -1,24 +1,36 @@
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Highlight active section in sidebar nav while scrolling
-const navLinks = document.querySelectorAll('.sidebar-nav a');
-const sections = [...navLinks].map(link =>
-  document.querySelector(link.getAttribute('href'))
-).filter(Boolean);
+// Theme toggle (persisted)
+const root = document.documentElement;
+const themeToggle = document.getElementById('themeToggle');
+const savedTheme = localStorage.getItem('theme');
 
-if ('IntersectionObserver' in window && sections.length){
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const id = '#' + entry.target.id;
-      const link = document.querySelector(`.sidebar-nav a[href="${id}"]`);
-      if (!link) return;
-      if (entry.isIntersecting){
-        navLinks.forEach(l => l.classList.remove('is-active'));
-        link.classList.add('is-active');
-      }
-    });
-  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
-
-  sections.forEach(section => observer.observe(section));
+if (savedTheme){
+  root.setAttribute('data-theme', savedTheme);
+} else if (window.matchMedia('(prefers-color-scheme: light)').matches){
+  root.setAttribute('data-theme', 'light');
 }
+
+themeToggle.addEventListener('click', () => {
+  const current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  const next = current === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+});
+
+// Mobile nav toggle
+const menuToggle = document.getElementById('menuToggle');
+const mobileNav = document.getElementById('mobileNav');
+
+menuToggle.addEventListener('click', () => {
+  const isOpen = mobileNav.classList.toggle('is-open');
+  menuToggle.setAttribute('aria-expanded', String(isOpen));
+});
+
+mobileNav.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileNav.classList.remove('is-open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  });
+});
