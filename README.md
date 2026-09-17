@@ -13,7 +13,7 @@ A single-page portfolio website built with plain HTML, CSS and JavaScript — no
 │   └── script.js           # Footer year + active nav highlighting
 ├── assets/
 │   ├── resume/
-│   │   └── Tappal_Faizan_Resume.pdf
+│   │   └── Faizan_Tappal_JavaBackendDeveloper_3.5YOE.pdf
 │   └── certs/
 │       ├── azure-fundamentals.jpg
 │       └── gcp-ace.jpg
@@ -39,7 +39,7 @@ No build tools needed. Either:
 
 - **Text/sections** — edit `index.html` directly.
 - **Colors/fonts/spacing** — edit the `:root` variables at the top of `css/styles.css`.
-- **Resume** — replace `assets/resume/Tappal_Faizan_Resume.pdf` (keep the same filename, or update the `href` in `index.html`).
+- **Resume** — replace `assets/resume/Faizan_Tappal_JavaBackendDeveloper_3.5YOE.pdf` (keep the same filename, or update the `href` in `index.html`).
 - **Certificates** — drop a new image into `assets/certs/` and update the corresponding `<a class="cert-card">` block in `index.html`.
 
 ## Deploying to GitHub Pages
